@@ -1,0 +1,23 @@
+{
+  "name": "parallel-programming-project-2020-fall",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marmot0814/Parallel-Programming-Project-2020-Fall.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marmot0814/Parallel-Programming-Project-2020-Fall/issues"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^1.6.2"
+  },
+  "homepage": "https://github.com/marmot0814/Parallel-Programming-Project-2020-Fall#readme"
+}
