@@ -18,25 +18,32 @@
 // typedef key_t HANDLE;
 // #endif
 
-struct Bound {
-  double minx, miny, maxx, maxy;
-  double cx, cy;
-};
+class QuadNode;
 
 class Quad {
-  double minx, miny, maxx, maxy;
-  Quad(double minx, double miny, double maxx, double maxy):
-    minx(minx), miny(miny), maxx(maxx), maxy(maxy){}
-  bool overlaps(Quad other) {
-    return !(minx >= other.maxx || maxx <= other.minx
-        || miny >= other.maxy || maxy <= other.miny);
-  }
+  public:
+    double minx, miny, maxx, maxy;
+    double cx, cy;
+    Quad(){}
+    Quad(double minx, double miny, double maxx, double maxy):
+      minx(minx), miny(miny), maxx(maxx), maxy(maxy){}
+    bool overlaps(Quad other) {
+      return !(minx >= other.maxx || maxx <= other.minx
+          || miny >= other.maxy || maxy <= other.miny);
+    }
+};
+
+class Item {
+  Napi::Object jsItem;
+  QuadNode* quadNode;
+  Item(Napi::Object& jsItem) : jsItem(jsItem) {};
 };
 
 class QuadNode : public Napi::ObjectWrap<QuadNode> {
   public:
 		static Napi::Object Init(Napi::Env env, Napi::Object exports);
 		QuadNode(const Napi::CallbackInfo& info);
+    QuadNode(const Quad);
 
 	private:
 		static Napi::FunctionReference constructor;
@@ -44,9 +51,9 @@ class QuadNode : public Napi::ObjectWrap<QuadNode> {
 
     double halfWidth;
     double halfHeight;
-    Bound bound;
-    std::vector<QuadNode> childNodes;
-    std::vector<Napi::Object> items;
+    Quad bound;
+    std::vector<QuadNode*> childNodes;
+    std::vector<Item> items;
 };
 
 #endif
