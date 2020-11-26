@@ -4,6 +4,7 @@
     "cflags!": [ "-fno-exceptions" ],
     "cflags_cc!": [ "-fno-exceptions" ],
     "sources": [
+      "addons/jsquadnode.cc",
       "addons/quadnode.cc",
 	  "addons/addon.cc"
     ],

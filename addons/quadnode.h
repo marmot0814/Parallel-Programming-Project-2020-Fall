@@ -1,5 +1,5 @@
-#ifndef NODE_SHARED_MEM_H
-#define NODE_SHARED_MEM_H
+#ifndef QUADNODE_H
+#define QUADNODE_H
 
 //#include <node.h>
 //#include <node_object_wrap.h>
@@ -39,21 +39,26 @@ class Item {
   Item(Napi::Object& jsItem) : jsItem(jsItem) {};
 };
 
-class QuadNode : public Napi::ObjectWrap<QuadNode> {
+class QuadNode {
   public:
-		static Napi::Object Init(Napi::Env env, Napi::Object exports);
-		QuadNode(const Napi::CallbackInfo& info);
-    QuadNode(const Quad);
-
-	private:
-		static Napi::FunctionReference constructor;
-		Napi::Value Check(const Napi::CallbackInfo& info);
-
     double halfWidth;
     double halfHeight;
     Quad bound;
     std::vector<QuadNode*> childNodes;
-    std::vector<Item> items;
+    std::vector<Item*> items;
+
+    QuadNode(Quad);
+};
+
+class jsQuadNode : public Napi::ObjectWrap<jsQuadNode> {
+  public:
+		static Napi::Object Init(Napi::Env env, Napi::Object exports);
+		jsQuadNode(const Napi::CallbackInfo& info);
+
+		static Napi::FunctionReference constructor;
+		Napi::Value Check(const Napi::CallbackInfo& info);
+
+    QuadNode* quadnode;
 };
 
 #endif

@@ -1,5 +1,7 @@
 var QuadNode = require("./addons/addon")
 
+console.log("hello");
+
 var bound = {};
 bound.minx = 1;
 bound.miny = 2;
